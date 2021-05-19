@@ -74,7 +74,7 @@ class _MiddlePartState extends State<MiddlePart> {
     );
   }
 
-  bottomSheetHandler(type) {
+  bottomSheetHandler(type, StateSetter str) {
     switch (type) {
       case 1:
         return Expanded(child: CupertinoSinglePicker());
@@ -92,7 +92,7 @@ class _MiddlePartState extends State<MiddlePart> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            SizedBox(child: CupertinoCause(), width: 150, height: 200),
+            SizedBox(child: CupertinoCause(str), width: 150, height: 200),
             SizedBox(child: CupertinoReact(), width: 150, height: 200),
           ],
         );
@@ -123,7 +123,7 @@ class _MiddlePartState extends State<MiddlePart> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      bottomSheetHandler(type),
+                      bottomSheetHandler(type, str),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: CupertinoButton(
@@ -139,18 +139,8 @@ class _MiddlePartState extends State<MiddlePart> {
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         backgroundColor: Colors.white);
   }
-}
 
-class CupertinoSinglePicker extends StatefulWidget {
-  const CupertinoSinglePicker({Key? key}) : super(key: key);
-
-  @override
-  _CupertinoSinglePickerState createState() => _CupertinoSinglePickerState();
-}
-
-class _CupertinoSinglePickerState extends State<CupertinoSinglePicker> {
-  @override
-  Widget build(BuildContext context) {
+  CupertinoSinglePicker() {
     return CupertinoPicker(
       itemExtent: 50,
       children: <Widget>[
@@ -169,18 +159,8 @@ class _CupertinoSinglePickerState extends State<CupertinoSinglePicker> {
       scrollController: FixedExtentScrollController(initialItem: 0),
     );
   }
-}
 
-class CupertinoCause extends StatefulWidget {
-  const CupertinoCause({Key? key}) : super(key: key);
-
-  @override
-  _CupertinoCauseState createState() => _CupertinoCauseState();
-}
-
-class _CupertinoCauseState extends State<CupertinoCause> {
-  @override
-  Widget build(BuildContext context) {
+  CupertinoCause(StateSetter str) {
     return CupertinoPicker(
       itemExtent: 50,
       children: <Widget>[
@@ -196,29 +176,19 @@ class _CupertinoCauseState extends State<CupertinoCause> {
           ))
       ],
       onSelectedItemChanged: (value) {
-        setState(() {
+        str(() {
           _index = value == 0 ? 0 : 1;
         });
       },
       scrollController: FixedExtentScrollController(initialItem: 0),
     );
   }
-}
 
-class CupertinoReact extends StatefulWidget {
-  const CupertinoReact({Key? key}) : super(key: key);
-
-  @override
-  _CupertinoReactState createState() => _CupertinoReactState();
-}
-
-class _CupertinoReactState extends State<CupertinoReact> {
   setDataModel() {
     return _index == 0 ? _catA : _catB;
   }
 
-  @override
-  Widget build(BuildContext context) {
+  CupertinoReact() {
     return CupertinoPicker(
       itemExtent: 50,
       children: <Widget>[
