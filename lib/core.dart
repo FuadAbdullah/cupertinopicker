@@ -180,7 +180,7 @@ class _MiddlePartState extends State<MiddlePart> {
           _index = value == 0 ? 0 : 1;
         });
       },
-      scrollController: FixedExtentScrollController(initialItem: 0),
+      scrollController: FixedExtentScrollController(initialItem: _index),
     );
   }
 
@@ -211,4 +211,6 @@ class _MiddlePartState extends State<MiddlePart> {
       scrollController: FixedExtentScrollController(initialItem: 0),
     );
   }
+
+
 }
